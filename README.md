@@ -26,66 +26,31 @@ The system is divided into 3 stages:
 ## Description
 Description for each file:
 
-### MovieLibraryMicroservice:
+### models:
+  * ChairModel -  ChairModel fields are id, row, chair_num, status, confermation_id.
 
-  * models:
-    * ChairModel -  ChairModel fields are id, row, chair_num, status, confermation_id.
+### resources:
+   * chairs -  Chair implement HTTP request methods such as get availble chairs and post for create chair in database. 
+   * orders -  Order implement HTTP request methods such as get all orders and post for start order process if cahir is availble, PayOrder implement HTTP request methods such as post for complete order procecing and put for cancel order.
+   * seeder - Seeder implement get request for seed 200 chairs data in database.
 
-  * resources: 
-    * chairs -  Chair implement HTTP request methods such as get availble chairs and post for create chair in database. 
-    * orders -  Order implement HTTP request methods such as get all orders and post for start order process if cahir is availble, PayOrder implement HTTP request methods such as post for complete order procecing and put for cancel order. 
+### setup:
+   * config - Set all the necessary settings.
 
-  * setup_movie_library:
-    * config - Set all the necessary settings.
-
-  * Additional files:
-    * main_movie_library - Create a Flask app with all the required routes.
-    * movie_library_db - An abstract object for SQLAlchemy implementation.
-    * movie_library_security - Security decorator for checking user accsess level.
-
-### UserMicroservice:
-
-  * models:
-    * user_model -  UserModel fields are id, name, password.
-
-  * resource: 
-    * user_resource -  Movie implement post HTTP request method. 
-
-  * setup_user:
-    * config - Set all the necessary settings.
-
-  * Additional files:
-    * main_user - Create a Flask app with all the required routes.
-    * user_db - An abstract object for SQLAlchemy implementation.
-    * user_security - Contains authenticate and identity methods for JWT.
-
-### Docker:
-  * Dockerfile.movie_library - Docker file for MovieLibraryMicroservice.
-  * Dockerfile.user - Docker file for UserMicroservice.
-
-### Gunicorn:
-  * guni_movie_library - Gunicorn configuration file for MovieLibraryMicroservice.
-  * guni_user - Gunicorn configuration file for UserMicroservice.
+### tests:
+   * unittests - Unitest file for testing API.
 
 ### Additional files:
-  * docker-compose -  Docker compose file to run multi-container microservice applications.
-  * requirements -  List of packages are required to run the project.
- 
+   * app - Create a Flask app with all the required routes.
+   * db - An abstract object for SQLAlchemy implementation.
+   * cache - An abstract object for Redis Cache implementation.
+   * Dockerfile - Docker file for flask app.
+   * docker-compose -  Docker compose file to run multi-container microservice applications.
+   * requirements -  List of packages are required to run the project.
 
 ## Setup
 To build and run project (after installation):
 
-* Navigate (in a terminal) into the ~/MoviezAPI folder.
+* Navigate (in a terminal) into the ~/MovieTheaterManagementSystem folder.
 * Run ```docker-compose build``` for your first build and when you have made changes.
 * Run ```docker-compose up``` to run all the services.
-
-
-## Task list
-- [x] JWT
-- [x] Database Relationships
-- [x] Microservice archtucture
-- [x] Docker
-- [x] Gunicorn
-- [ ] Recommender system
-
-
