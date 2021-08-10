@@ -28,13 +28,12 @@ Description for each file:
 
 ### MovieLibraryMicroservice:
 
-  * movie_library_models:
-    * category_model -  CategoryModel fields are id, name. in addition contains a movies field which contains all the movies belonging to it implement by one-to-     many relationship
-    * movie_model -  MovieModel fields are id, name, price, video_link. in addition contains a category_id field which contains the id category which it is associated implement by many-to-one relationship
+  * models:
+    * ChairModel -  ChairModel fields are id, row, chair_num, status, confermation_id.
 
-  * movie_library_resource: 
-    * category_resource -  Category implement HTTP request methods such as get, post, delete. 
-    * movie_resource -  Movie implement HTTP request methods such as get, post, delete, put. 
+  * resources: 
+    * chairs -  Chair implement HTTP request methods such as get availble chairs and post for create chair in database. 
+    * orders -  Order implement HTTP request methods such as get all orders and post for start order process if cahir is availble, PayOrder implement HTTP request methods such as post for complete order procecing and put for cancel order. 
 
   * setup_movie_library:
     * config - Set all the necessary settings.
