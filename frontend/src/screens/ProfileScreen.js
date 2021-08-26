@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listMyOrders } from '../actions/orderActions'
 
 const ProfileScreen = ({ location, history }) => {
-    
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+
     const orderListMy = useSelector((state) => state.orderListMy)
     const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
+
+    useEffect(() => {
+        if (!userInfo) {
+            history.push('/login')
+        } else{
+            dispatch(listMyOrders())
+            }
+    }, [dispatch, history, userInfo])
 
     return (
         <Row>
