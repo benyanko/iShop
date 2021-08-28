@@ -8,8 +8,8 @@ import { logout } from '../actions/userActions'
 const Header = () => {
     const dispatch = useDispatch()
 
-    const userLogiin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogiin
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
 
     const logoutHandler = () => {
         dispatch(logout())
@@ -30,8 +30,13 @@ const Header = () => {
                                   <i className='fas fa-shopping-cart'></i> Cart
                                 </Nav.Link>
                             </LinkContainer>
+                            <LinkContainer to={'/about'}>
+                                <Nav.Link>
+                                    About
+                                </Nav.Link>
+                            </LinkContainer>
                             {userInfo ? (
-                                <NavDropdown title={userInfo.name} id='username'>
+                                <NavDropdown  title={userInfo.name} id='username'>
                                     <LinkContainer to='/profile'>
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
                                     </LinkContainer>

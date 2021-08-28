@@ -18,7 +18,7 @@ const HomeScreen = () => {
     return (
         <>
           <h1>
-              Latest iPhones
+              Latest Products
           </h1>
             {loading ?
                 (<Loader/>):
