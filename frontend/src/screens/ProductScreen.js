@@ -6,10 +6,10 @@ import Rating from "../components/Rating";
 import { listProductsDetails } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import Product from "../components/Product";
 
 const ProductScreen = ({ history, match }) => {
     const [qty, setQty] = useState(1)
+
 
     const dispatch = useDispatch()
 
@@ -114,7 +114,9 @@ const ProductScreen = ({ history, match }) => {
                                 </Card>
                             </Col>
                         </Row>
+
                     )}
+
         </>
     )
 }
