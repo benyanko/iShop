@@ -5,9 +5,10 @@ import Product from "../components/Product"
 import {listProducts} from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
-import {listMyOrders} from "../actions/orderActions";
 
-const HomeScreen = ({ location, history }) => {
+const HomeScreen = ({ location, history, match }) => {
+    const keyword = match.params.keyword
+
     const dispatch = useDispatch()
 
     const userLogin = useSelector((state) => state.userLogin)
@@ -20,8 +21,9 @@ const HomeScreen = ({ location, history }) => {
         if (!userInfo) {
             history.push('/login')
         } else{
-            dispatch(listProducts())        }
-    }, [dispatch, history, userInfo])
+            dispatch(listProducts(keyword))
+        }
+    }, [dispatch, history, keyword, userInfo])
 
 
     return (

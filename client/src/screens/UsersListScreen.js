@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listUsers } from '../actions/userActions'
+import {Route} from "react-router-dom";
+import UserSearchBox from "../components/UserSearchBox";
 
-const UserListScreen = ({ history }) => {
+const UserListScreen = ({ history, match }) => {
+    const keyword = match.params.keyword
+
     const dispatch = useDispatch()
 
     const userList = useSelector((state) => state.userList)
@@ -17,7 +21,7 @@ const UserListScreen = ({ history }) => {
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            dispatch(listUsers())
+            dispatch(listUsers(keyword))
         } else {
             history.push('/login')
         }
@@ -26,6 +30,7 @@ const UserListScreen = ({ history }) => {
     return (
         <>
             <h1>Users</h1>
+            <Route render={({ history }) => <UserSearchBox history={history} />} />
             {loading ? (
                 <Loader />
             ) : error ? (
