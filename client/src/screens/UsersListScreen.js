@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listUsers } from '../actions/userActions'
-import {Route} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 import UserSearchBox from "../components/UserSearchBox";
 
 const UserListScreen = ({ history, match }) => {
@@ -30,7 +30,13 @@ const UserListScreen = ({ history, match }) => {
     return (
         <>
             <h1>Users</h1>
-            <Route render={({ history }) => <UserSearchBox history={history} />} />
+            {!keyword ? (
+                <Route render={({ history }) => <UserSearchBox history={history} />} />
+            ): (
+                <Link className={'btn btn-light my-3'} to={'/admin/userlist'}>
+                    Go Back
+                </Link>
+            )}
             {loading ? (
                 <Loader />
             ) : error ? (
