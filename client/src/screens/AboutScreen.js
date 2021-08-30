@@ -1,10 +1,19 @@
-import React from "react"
-import {Row, Col} from "react-bootstrap"
-import Product from "../components/Product"
-import Loader from "../components/Loader"
-import Message from "../components/Message"
+import React, {useEffect} from "react"
+import {useDispatch, useSelector} from "react-redux";
+import {listProducts} from "../actions/productActions";
 
-const AboutScreen = () => {
+const AboutScreen = ({ location, history }) => {
+
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+
+    useEffect(() => {
+        if (!userInfo) {
+            history.push('/login')
+        }
+    }, [dispatch, history, userInfo])
 
     return (
         <>

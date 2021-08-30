@@ -6,6 +6,7 @@ import Rating from "../components/Rating";
 import { listProductsDetails } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import {addToCart} from "../actions/cartActions";
 
 const ProductScreen = ({ history, match }) => {
     const [qty, setQty] = useState(1)
@@ -13,12 +14,19 @@ const ProductScreen = ({ history, match }) => {
 
     const dispatch = useDispatch()
 
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+
     const productDetails = useSelector(state => state.productDetails)
     const {loading, error, product } = productDetails
 
     useEffect(() => {
-        dispatch(listProductsDetails(match.params.id))
-    }, [dispatch, match])
+        if (!userInfo) {
+            history.push('/login')
+        } else{
+            dispatch(listProductsDetails(match.params.id))
+        }
+    }, [dispatch, history, userInfo, match])
 
     const addToCartHandler = () => {
         history.push(`/cart/${match.params.id}?qty=${qty}`)

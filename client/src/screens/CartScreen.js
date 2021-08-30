@@ -4,6 +4,7 @@ import Message from "../components/Message"
 import {Link} from "react-router-dom";
 import { Row, Col, ListGroup, Image, Form, Button, Card } from "react-bootstrap";
 import {addToCart, removeFromCart} from "../actions/cartActions";
+import {listProducts} from "../actions/productActions";
 
 const CartScreen = ({ match, location, history }) => {
     const productId = match.params.id
@@ -12,14 +13,22 @@ const CartScreen = ({ match, location, history }) => {
 
     const dispatch = useDispatch()
 
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+
     const cart = useSelector((state) => state.cart)
     const { cartItems } = cart
 
     useEffect(() => {
-        if (productId) {
+        if (!userInfo) {
+            history.push('/login')
+        } else{
+            if (productId) {
             dispatch(addToCart(productId, qty))
+            }
         }
-    }, [dispatch, productId, qty])
+    }, [dispatch, history, userInfo, qty, productId])
+
 
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id))

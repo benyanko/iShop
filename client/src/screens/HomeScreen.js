@@ -5,20 +5,29 @@ import Product from "../components/Product"
 import {listProducts} from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
+import {listMyOrders} from "../actions/orderActions";
 
-const HomeScreen = () => {
+const HomeScreen = ({ location, history }) => {
     const dispatch = useDispatch()
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
 
     const productList = useSelector(state => state.productList )
     const {loading, error, products } = productList
+
     useEffect(() => {
-        dispatch(listProducts())
-    }, [dispatch])
+        if (!userInfo) {
+            history.push('/login')
+        } else{
+            dispatch(listProducts())        }
+    }, [dispatch, history, userInfo])
+
 
     return (
         <>
           <h1>
-              Latest Products
+              Products
           </h1>
             {loading ?
                 (<Loader/>):
